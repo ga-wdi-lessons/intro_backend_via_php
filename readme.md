@@ -4,6 +4,7 @@
 - Explain the differences between GET and POST
 - Describe the components of an HTTP request
 - Describe the differences between the front-end and back-end
+- Define "cookies"
 
 ## Framing
 
@@ -179,11 +180,49 @@ echo file_get_contents("binary.txt");
 ?>
 ```
 
-## TODO
+### What's a "cookie"?
 
-- Nameserver and DNS
-- Index
-- Cookies
+A small piece of data stored on your computer that is associated with a specific site.
 
-## References
-- Famous interview question: [What happens when you type google.com into your browser's address box and press enter?](https://github.com/alex/what-happens-when)
+Go to:
+
+www.putsomethinghere.com/php/global.php
+
+Notice the `$_COOKIE` section. This site has set a cookie on your browser in its **response**. Your browser will "remember" it until you close your browser.
+
+You can see all the cookies in your browser here:
+
+![Cookies](cookies.gif)
+
+You can access cookies on any page via Javascript by opening the browser console and typing:
+
+```
+console.log(document.cookie);
+```
+
+- Why might cookies be useful?
+- Why is it good to occasionally "clear your cookies"?
+
+## Everything Else
+
+### How do IP addresses, domains, and URLs work? (aka the DNS)
+
+http://computer.howstuffworks.com/dns.htm
+
+### Why is it "index.html"?
+
+**In normal English**, an "index" is a list in the back of a book that tells you where to find concepts in the book.
+
+On the web, an index is a webpage that tells you where to find content on a website.
+
+When you go to www.amazon.com, you're actually looking at www.amazon.com/index.html. (Go to either and you'll get the same result.) The purpose of this page is to give you a starting point to find the rest of the content on the Amazon website.
+
+This is an industry standard. Most servers, when they receive a request that doesn't specify a certain file (e.g. `amazon.com` vs. `amazon.com/index.html`) will look for an `index.html` and show that instead.
+
+If it doesn't exist they'll show a default index page, like www.putsomethinghere.com/php
+
+### What happens when you type google.com into your browser's address box and press "Enter"?
+
+This is a famous interview question.
+
+https://github.com/alex/what-happens-when
