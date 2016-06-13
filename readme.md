@@ -1,15 +1,9 @@
 # Intro to the Back-end via PHP
 
 ## Learning Objectives
-- HTTP methods
-- GET, POST
-- Headers vs body
-- Cookies
-- Index
-- Templating engine
-- Difference between front-end and back-end
-- ID which languages are used on which end
-- Nameserver and DNS
+- Explain the differences between GET and POST
+- Describe the components of an HTTP request
+- Describe the differences between the front-end and back-end
 
 ## Framing
 
@@ -184,6 +178,12 @@ header("Content-type: image/jpeg");
 echo file_get_contents("binary.txt");
 ?>
 ```
+
+## TODO
+
+- Nameserver and DNS
+- Index
+- Cookies
 
 ## References
 - Famous interview question: [What happens when you type google.com into your browser's address box and press enter?](https://github.com/alex/what-happens-when)
