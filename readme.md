@@ -8,6 +8,10 @@
 
 ## Framing
 
+This is going to be a rather "talky" class during which we'll touch on the main part of what happens when you go to or send data to a website.
+
+## Dramatis Personae
+
 A **server** is a computer that receives **requests** for data and **responds** to them. It "serves" data.
 
 The job of your browser is to "interpret" the data.
