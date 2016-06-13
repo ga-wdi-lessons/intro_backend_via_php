@@ -167,7 +167,9 @@ http://putsomethinghere.com/php/image.php
 
 ### Response headers are important
 
-Copy the enclosed [`binary.txt`](binary.txt) to your `htdocs` folder. In the same directory, make a new PHP file with the contents below, and navigate to that file in your browser.
+Download [`binary.txt`](https://github.com/ga-wdi-lessons/intro_backend_via_php/raw/master/binary.txt). You can do so in Chrome by option-clicking on that link.
+
+Copy it to your `htdocs` folder. In the same directory, make a new PHP file with the contents below, and navigate to that file in your browser.
 
 ```php
 <?php
