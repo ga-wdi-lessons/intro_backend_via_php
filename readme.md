@@ -11,7 +11,7 @@
 - ID which languages are used on which end
 - Nameserver and DNS
 
-## Request/Response Cycle
+## Framing
 
 A **server** is a computer that receives **requests** for data and **responds** to them. It "serves" data.
 
@@ -28,7 +28,7 @@ The job of your browser is to "interpret" the data.
 - Your browser notices the images, stylesheets, and javascripts linked in the HTML and makes a request for each of them
 - Your browser executes all the CSS and JS
 
-### What's in a request?
+## What's in a request?
 
 A request is much more than simply, "This is the URL I want."
 
@@ -38,7 +38,15 @@ http://putsomethinghere.com/php/global.php
 
 > This is a web domain I own but am not using at the moment.
 
-Everything beginning with `HTTP` is a header that was sent by the request you just made to my server.
+Everything beginning with `HTTP` is a **header** that was sent by the request you just made to my server.
+
+### Header and body
+
+Requests have two "body parts": the **header** and the **body**. They also have a **destination**: the URL.
+
+The header contains metadata that gives the server additional information about what you're requesting: what browser you're using, what kind of file you want, and so on.
+
+The body contains any data sent with the request. It is is empty for virtually all requests you make by just typing a URL into your browser. It is used most often when you submit a form.
 
 ### You do: Set a header
 
@@ -54,11 +62,36 @@ Now "Add Header". It can be anything you want. I tried a `name` of "Turtle" and 
 
 - Look for "Turtle" in the response. Where is it?
 
+### View headers for any page in Chrome
 
+![View headers in Chrome](headers.gif)
 
-### GET and POST (and the rest)
+### HTTP
 
-## Dynamic Pages and Templating
+The system we usually use for requests and responses is called HTTP, or HyperText Transfer Protocol.
+
+Web browsers are capable pretty much only of HTTP, and a more secure version of HTTP called HTTPS.
+
+Other applications can use other transfer protocols. E-mail, FTP, Bitcoin, and instant messaging are all protocols.
+
+[See lots more.](https://en.wikipedia.org/wiki/Lists_of_network_protocols)
+
+#### GET and POST (and the rest)
+
+HTTP lets you make requests in two ways:
+
+1. Sending your data as a querystring in the URL, with an empty body
+- Sending your data in the body
+
+The first type of request is a GET request. This is what happens when you type a URL into your browser.
+
+The second type has several sub-types: POST, PUT, PATCH, and DELETE. These are used for modifying data. PUT and PATCH are used to update data. Only GET and POST may be used with HTML forms.
+
+- Why don't POST, PUT, etc., put data in the querystring?
+- Why is GET called "GET"?
+- Can you bookmark a GET request? How about a POST request?
+
+## Responses
 
 ### Analogy: The theater
 
@@ -82,7 +115,75 @@ Usually you include your street address and phone number on your resume. However
 
 I could use Javascript or CSS to hide this information, but anyone would be able to look at my source code to see it.
 
-So, on the back-end of my site I have a rule that says, "If I'm accessing this site from my computer, show my number and address. Otherwise, hide them."
+So, on the back-end of my site I have a rule that says, "If this site is accessed from my computer, show my number and address. Otherwise, hide them."
+
+### Dynamic HTML and Templating
+
+Facebook has 1.65 billion users. Each has a profile page. There isn't one HTML page for each user. Instead there is a profile page HTML template. When you view your profile, Facebook inserts the appropriate data into the template before sending you the HTML.
+
+This makes the page **dynamic**.
+
+There are many **templating engines** that simplify this process. You have seen Handlebars, which can be used on the front- or back-end with Javascript. PHP is another.
+
+### You Do: Make a dynamic page
+
+Copy and paste this code into a PHP file in your `htdocs` folder and navigate to it in your browser.
+
+```php
+<?php
+if(empty($_GET["username"])){
+  $username = "Guest";
+}else{
+  $username = $_GET["username"];
+}
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome, <?= $username ?></title>
+  </head>
+  <body>
+<?php if($username === "Guest"): ?>
+    <h1>Please log in!</h1>
+    <form method="get" action="">
+      <input name="username" placeholder="Username" />
+      <button type="submit">Submit</button>
+    </form>
+<?php else: ?>
+    <h1>Welcome, <?= $username ?>!</h1>
+    <h2><a href="?">Log out</a></h2>
+<?php endif; ?>
+  </body>
+</html>
+```
+
+View the page's source code **in your browser**.
+
+- Can you see the `<?php ?>` tags in your browser?
+- I wouldn't use GET for user authentication in a real app. What would I use instead?
+
+### More than just dynamic HTML
+
+http://putsomethinghere.com/php/image.php
+
+### Response headers are important
+
+Copy the enclosed [`binary.txt`](binary.txt) to your `htdocs` folder. In the same directory, make a new PHP file with the contents below, and navigate to that file in your browser.
+
+```php
+<?php
+echo file_get_contents("binary.txt");
+?>
+```
+
+Now add one line to the PHP file:
+
+```php
+<?php
+header("Content-type: image/jpeg");
+echo file_get_contents("binary.txt");
+?>
+```
 
 ## References
 - Famous interview question: [What happens when you type google.com into your browser's address box and press enter?](https://github.com/alex/what-happens-when)
